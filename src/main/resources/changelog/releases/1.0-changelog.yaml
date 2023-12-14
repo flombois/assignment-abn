@@ -1,0 +1,265 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1.0.0"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_ingredients
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: ingredients
+  - changeSet:
+      id: "1.0.1"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.0
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_quantities
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: value
+                  type: INT
+              - column:
+                  name: symbol
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ingredient_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: recipe_id
+                  type: UUID
+            tableName: quantities
+  - changeSet:
+      id: "1.0.2"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.1
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_recipes
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: servings
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: value
+                  type: INT
+              - column:
+                  name: symbol
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ingredient_id
+                  type: UUID
+            tableName: recipes
+  - changeSet:
+      id: "1.0.3"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.2
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_steps
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: recipe_id
+                  type: UUID
+              - column:
+                  name: step_order
+                  type: INT
+            tableName: steps
+  - changeSet:
+      id: "1.0.4"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.3
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tags
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: tags
+  - changeSet:
+      id: "1.0.5"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.0
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: uc_ingredients_name
+            tableName: ingredients
+  - changeSet:
+      id: "1.0.6"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.5
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: uc_tags_name
+            tableName: tags
+  - changeSet:
+      id: "1.0.7"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.6
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ingredient_id
+            baseTableName: quantities
+            constraintName: FK_QUANTITIES_ON_INGREDIENT
+            referencedColumnNames: id
+            referencedTableName: ingredients
+  - changeSet:
+      id: "1.0.8"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.7
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: recipe_id
+            baseTableName: quantities
+            constraintName: FK_QUANTITIES_ON_RECIPE
+            referencedColumnNames: id
+            referencedTableName: recipes
+  - changeSet:
+      id: "1.0.9"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.8
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ingredient_id
+            baseTableName: recipes
+            constraintName: FK_RECIPES_ON_INGREDIENT
+            referencedColumnNames: id
+            referencedTableName: ingredients
+  - changeSet:
+      id: "1.0.10"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.9
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: recipe_id
+            baseTableName: steps
+            constraintName: FK_STEPS_ON_RECIPE
+            referencedColumnNames: id
+            referencedTableName: recipes

@@ -1,0 +1,5 @@
+quarkus:
+  liquibase:
+    change-log: changelog/releases-changelog.yaml
+    migrate-at-start: true
+    validate-on-migrate: true

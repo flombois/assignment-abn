@@ -1,4 +1,4 @@
-package com.github.flombois.models;
+package com.github.flombois.models.recipes;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

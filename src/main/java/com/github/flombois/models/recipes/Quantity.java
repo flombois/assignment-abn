@@ -1,5 +1,6 @@
-package com.github.flombois.models;
+package com.github.flombois.models.recipes;
 
+import com.github.flombois.models.ingredients.Ingredient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;

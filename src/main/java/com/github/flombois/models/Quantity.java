@@ -5,8 +5,8 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.Length;
 
-@Entity(name = "quantities")
-public class Quantity extends BaseEntity {
+@Embeddable
+public class Quantity {
 
     @Positive
     @Max(Integer.MAX_VALUE)
@@ -20,4 +20,27 @@ public class Quantity extends BaseEntity {
     @JoinColumn(name = "ingredient_id", nullable = false)
     private Ingredient ingredient;
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
 }

@@ -24,14 +24,18 @@ public class Recipe extends BaseEntity {
 
     @NotEmpty
     @Size(max = 1024)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipe_id", nullable = false)
+    @ElementCollection
+    @CollectionTable(name = "quantities",
+            joinColumns = @JoinColumn(name = "recipe_id", nullable = false),
+            foreignKey = @ForeignKey(name = "FK_RECIPES_ON_INGREDIENT"))
     private List<@NotNull Quantity> quantities;
 
     @NotEmpty
     @Size(max = 256)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recipe_id", nullable = false)
+    @ElementCollection
+    @CollectionTable(name = "steps",
+            joinColumns = @JoinColumn(name = "recipe_id", nullable = false),
+            foreignKey = @ForeignKey(name = "FK_STEPS_ON_RECIPE"))
     @OrderColumn(name = "step_order")
     private List<@NotNull Step> steps;
 }

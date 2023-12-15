@@ -1,11 +1,12 @@
 package com.github.flombois.models;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity(name = "steps")
-public class Step extends BaseEntity {
+@Embeddable
+public class Step {
 
     @NotBlank
     @Column(nullable = false)

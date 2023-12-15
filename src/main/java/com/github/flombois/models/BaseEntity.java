@@ -1,4 +1,4 @@
-package com.github.flombois.model;
+package com.github.flombois.models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;

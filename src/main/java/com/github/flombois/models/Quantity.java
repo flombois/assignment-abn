@@ -1,4 +1,4 @@
-package com.github.flombois.model;
+package com.github.flombois.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;

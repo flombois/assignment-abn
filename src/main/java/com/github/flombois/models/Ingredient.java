@@ -1,4 +1,4 @@
-package com.github.flombois.model;
+package com.github.flombois.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

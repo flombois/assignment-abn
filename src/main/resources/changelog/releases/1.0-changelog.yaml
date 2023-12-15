@@ -263,3 +263,44 @@ databaseChangeLog:
             constraintName: FK_STEPS_ON_RECIPE
             referencedColumnNames: id
             referencedTableName: recipes
+  - changeSet:
+      id: "1.0.11"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.10
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: recipe_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: tag_id
+                  type: UUID
+            tableName: recipes_tags
+        - addPrimaryKey:
+            columnNames:  recipe_id, tag_id
+            constraintName: pk_recipes_tags
+            tableName: recipes_tags
+            validate:  true
+        - addForeignKeyConstraint:
+            baseColumnNames: recipe_id
+            baseTableName: recipes_tags
+            constraintName: FK_RECIPES_ON_TAGS
+            referencedColumnNames: id
+            referencedTableName: recipes
+        - addForeignKeyConstraint:
+            baseColumnNames: tag_id
+            baseTableName: recipes_tags
+            constraintName: FK_TAGS_ON_RECIPES
+            referencedColumnNames: id
+            referencedTableName: tags

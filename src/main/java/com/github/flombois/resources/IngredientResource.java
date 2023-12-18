@@ -4,7 +4,6 @@ import com.github.flombois.models.ingredients.Ingredient;
 import com.github.flombois.repositories.ingredients.IngredientRepository;
 import com.github.flombois.utils.SortQueryBuilder;
 import io.quarkus.panache.common.Sort;
-import jakarta.activation.MimeType;
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -15,9 +14,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
-
 @Path("/ingredients")
-@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class IngredientResource {
 
@@ -26,7 +23,7 @@ public class IngredientResource {
     @GET
     public Response list(@QueryParam("sort") List<String> sortQuery,
                          @QueryParam("page") @DefaultValue("0") @PositiveOrZero int pageIndex,
-                         @QueryParam("size") @DefaultValue("10") @Min(1) @Max(50) int pageSize) {
+                         @QueryParam("size") @DefaultValue("5") @Min(1) @Max(20) int pageSize) {
         Sort sort = SortQueryBuilder.parse(sortQuery);
         List<Ingredient> ingredients = getIngredientRepository().findAll(sort).page(pageIndex, pageSize).list();
         return Response.ok(ingredients).build();

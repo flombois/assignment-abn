@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
-
 @Entity(name = "ingredients")
 public class Ingredient extends BaseEntity {
 
@@ -21,6 +20,6 @@ public class Ingredient extends BaseEntity {
     }
 
     public void setName(@NotBlank String name) {
-        this.name = name.toLowerCase();
+        this.name = name;
     }
 }

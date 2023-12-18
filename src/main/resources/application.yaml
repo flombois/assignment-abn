@@ -3,3 +3,11 @@ quarkus:
     change-log: changelog/releases-changelog.yaml
     migrate-at-start: true
     validate-on-migrate: true
+
+
+"%test":
+  quarkus:
+    log:
+      category:
+        "io.quarkus.test":
+          level: DEBUG

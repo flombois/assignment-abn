@@ -304,3 +304,21 @@ databaseChangeLog:
             constraintName: FK_TAGS_ON_RECIPES
             referencedColumnNames: id
             referencedTableName: tags
+  - changeSet:
+      id: "1.0.12"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.10
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - createIndex:
+            indexName: idx_ingredients_name
+            unique:  true
+            columns:
+              - column:
+                  name: LOWER(name)
+            tableName:  ingredients

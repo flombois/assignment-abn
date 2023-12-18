@@ -1,4 +1,4 @@
-package com.github.flombois.resources.postgres;
+package com.github.flombois.integration.resources.databases;
 
 public class Postgres14TestResource extends PostgresTestResource {
     @Override

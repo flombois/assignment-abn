@@ -1,4 +1,4 @@
-package com.github.flombois.resources.postgres;
+package com.github.flombois.integration.resources.databases;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 import org.testcontainers.containers.PostgreSQLContainer;

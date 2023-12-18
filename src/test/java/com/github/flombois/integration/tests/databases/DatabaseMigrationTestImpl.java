@@ -1,11 +1,11 @@
-package com.github.flombois.integration.databases;
+package com.github.flombois.integration.tests.databases;
 
 import io.quarkus.liquibase.LiquibaseFactory;
 import jakarta.inject.Inject;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public abstract class PostgresMigrationTest implements DatabaseMigrationTest {
+public abstract class DatabaseMigrationTestImpl implements DatabaseMigrationTest {
 
     @Inject
     LiquibaseFactory liquibaseFactory;

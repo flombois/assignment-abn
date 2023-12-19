@@ -15,7 +15,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,9 +40,8 @@ public class IngredientResource {
     @Path("/{id}")
     public Response get(@PathParam("id") UUID id) {
          Optional<Ingredient> ingredient =  getIngredientRepository().findByIdOptional(id);
-         if(ingredient.isPresent()) {
+         if(ingredient.isPresent())
              return Response.ok(ingredient.get()).build();
-         }
          return Response.status(Response.Status.NOT_FOUND).build();
     }
 

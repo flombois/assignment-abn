@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface NamedEntityRepository<T> extends PanacheRepositoryBase<T, UUID> {
 
-    default Optional<T> findByName(String name) {
+    default Optional<T> findByNameOptional(String name) {
         return find("name", name).firstResultOptional();
     }
 }

@@ -3,3 +3,6 @@ quarkus:
     change-log: changelog/releases-changelog.yaml
     migrate-at-start: true
     validate-on-migrate: true
+  hibernate-search-orm:
+    elasticsearch:
+      version: 8

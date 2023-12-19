@@ -2,10 +2,12 @@ package com.github.flombois.models.recipes;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
+@Indexed
 @Embeddable
 public class Step {
 
@@ -14,6 +16,7 @@ public class Step {
     private int stepOrder;
 
     @NotBlank
+    @FullTextField(analyzer = "english")
     @Column(nullable = false)
     private String description;
 

@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.validator.constraints.Length;
 
+@Indexed
 @Embeddable
 public class Quantity {
 
@@ -20,6 +22,8 @@ public class Quantity {
     @Column(nullable = false)
     private String symbol;
 
+//    @IndexedEmbedded
+//    @IndexingDependency(reindexOnUpdate = ReindexOnUpdate.SHALLOW)
     @ManyToOne
     @JoinColumn(name = "ingredient_id", nullable = false)
     private Ingredient ingredient;

@@ -6,18 +6,27 @@ import com.github.flombois.models.tags.Tag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import org.hibernate.search.engine.backend.types.Sortable;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
+@Indexed
 @Entity(name = "recipes")
 public class Recipe extends BaseEntity {
 
     @NotBlank
     @Length(max = 255)
+    @FullTextField(analyzer = "name")
+    @KeywordField(name = "name_sort", sortable = Sortable.YES, normalizer = "sort")
     @Column(nullable = false)
     private String name;
 
+    @FullTextField(analyzer = "english")
     private String description;
 
     @Positive
@@ -26,6 +35,7 @@ public class Recipe extends BaseEntity {
     private int servings;
 
     @Size(max = 1024)
+    @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "quantities",
             joinColumns = @JoinColumn(name = "recipe_id", nullable = false),
@@ -33,6 +43,7 @@ public class Recipe extends BaseEntity {
     private List<@NotNull Quantity> quantities;
 
     @Size(max = 256)
+    @IndexedEmbedded
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "steps",
             joinColumns = @JoinColumn(name = "recipe_id", nullable = false),

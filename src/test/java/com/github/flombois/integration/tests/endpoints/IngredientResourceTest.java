@@ -184,11 +184,11 @@ class IngredientResourceTest implements ProvisionDatabase {
             @ParameterizedTest
             @DisplayName("Then return results sorted by UUID")
             @CsvSource({
-                    "0,102ed299-d501-4e4a-9ad6-2e760d6c5bc9,Eggplants",
-                    "1,111d1601-bc8a-4320-8bc4-d652b4f4079b,Ground cloves",
-                    "2,1450fe41-ed37-4384-8481-99208d939dbc,Buttermilk",
-                    "3,180c1909-2f78-46f0-b3b1-b56e5b2fd267,Brown sugar",
-                    "4,18f40962-5ca9-472b-a5e6-863882c6577f,Parmesan cheese",
+                    "0,03594121-d70d-49ed-9e25-bd02d5b238e4,Potatoes",
+                    "1,102ed299-d501-4e4a-9ad6-2e760d6c5bc9,Eggplants",
+                    "2,111d1601-bc8a-4320-8bc4-d652b4f4079b,Ground cloves",
+                    "3,1450fe41-ed37-4384-8481-99208d939dbc,Buttermilk",
+                    "4,180c1909-2f78-46f0-b3b1-b56e5b2fd267,Brown sugar",
             })
             void sortedByUUID(int index, UUID id, String name) {
                 List<Ingredient> ingredients = given()
@@ -212,9 +212,9 @@ class IngredientResourceTest implements ProvisionDatabase {
             @CsvSource({
                     "0,d7e123b1-f024-4ab9-aeae-fd271982e759,Almonds",
                     "1,696139fa-6b61-4e3f-9d51-31c28fab936c,Baking powder",
-                    "2,3742649d-83e8-44a6-ade9-1aaf24f4dfb6,Bananas",
-                    "3,1bf2bf66-b260-496a-bba0-5361ad786786,Basil",
-                    "4,25115919-2d94-4fea-bd4c-15f83655283c,Blueberries",
+                    "2,71001cb4-e94c-4792-b894-f187febfe46a,Baking soda",
+                    "3,3742649d-83e8-44a6-ade9-1aaf24f4dfb6,Bananas",
+                    "4,1bf2bf66-b260-496a-bba0-5361ad786786,Basil",
             })
             void sortedByName(int index, UUID id, String name) {
                 List<Ingredient> ingredients = given()

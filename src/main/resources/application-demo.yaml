@@ -1,0 +1,5 @@
+quarkus:
+  hibernate-orm:
+    sql-load-script: demo.sql
+    database:
+      generation: none

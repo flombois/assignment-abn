@@ -1,9 +1,14 @@
 quarkus:
   http:
     port: 9000
+  test:
+    continuous-testing: DISABLED
   hibernate-orm:
     database:
       generation: none
+  hibernate-search-orm:
+    elasticsearch:
+      hosts: elasticsearch:9200
   datasource:
     db-kind: postgresql
     jdbc:

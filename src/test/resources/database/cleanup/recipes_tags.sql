@@ -1,0 +1,1 @@
+TRUNCATE TABLE recipes_tags CASCADE;

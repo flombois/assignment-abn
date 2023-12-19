@@ -278,3 +278,18 @@ databaseChangeLog:
               - column:
                   name: LOWER(name)
             tableName:  ingredients
+  - changeSet:
+      id: "1.0.12"
+      author: flombois
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      preConditions:
+        - onFail: HALT
+        - changeSetExecuted:
+            id: 1.0.11
+            author: flombois
+            changeLogFile: changelog/releases/1.0-changelog.yaml
+      changes:
+        - addUniqueConstraint:
+            columnNames: recipe_id, step_order
+            constraintName: uc_recipes_steps
+            tableName: steps

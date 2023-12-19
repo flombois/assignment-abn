@@ -59,17 +59,6 @@ public class TagResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
-    @GET
-    @Path("/{name}/recipes")
-    public Response getRecipesByTagName(@PathParam("name") String name) {
-        Optional<Tag> tagOptional = getTagRepository().findByNameOptional(name);
-        if(tagOptional.isPresent()) {
-            List<Recipe> recipes = tagOptional.get().getRecipes();
-            return Response.ok(recipes).build();
-        }
-        return Response.status(Response.Status.NOT_FOUND).build();
-    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(@Valid Tag tag) {

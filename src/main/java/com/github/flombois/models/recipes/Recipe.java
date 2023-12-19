@@ -1,5 +1,6 @@
 package com.github.flombois.models.recipes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.flombois.models.BaseEntity;
 import com.github.flombois.models.tags.Tag;
 import jakarta.persistence.*;
@@ -26,7 +27,7 @@ public class Recipe extends BaseEntity {
 
     @NotEmpty
     @Size(max = 1024)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "quantities",
             joinColumns = @JoinColumn(name = "recipe_id", nullable = false),
             foreignKey = @ForeignKey(name = "FK_RECIPES_ON_INGREDIENT"))
@@ -34,14 +35,14 @@ public class Recipe extends BaseEntity {
 
     @NotEmpty
     @Size(max = 256)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "steps",
             joinColumns = @JoinColumn(name = "recipe_id", nullable = false),
             foreignKey = @ForeignKey(name = "FK_STEPS_ON_RECIPE"))
-    @OrderColumn(name = "step_order")
     private List<@NotNull Step> steps;
 
     @Size(max = 256)
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "recipes_tags",
         joinColumns = @JoinColumn(name = "recipe_id"),

@@ -22,4 +22,8 @@ public abstract class BaseEntity extends PanacheEntityBase {
     public UUID getId() {
         return id;
     }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }

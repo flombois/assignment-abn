@@ -11,10 +11,10 @@ INSERT INTO steps (recipe_id, step_order, description) VALUES
 -- Tiramisu recipe
 INSERT INTO steps (recipe_id, step_order, description) VALUES
 ('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 1, 'Brew a strong cup of coffee and set aside to cool.'),
-('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 2, 'In a mixing bowl, whisk together mascarpone and sugar until smooth.'),
+('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 2, 'In a mixing bowl whisk together mascarpone and sugar until smooth.'),
 ('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 3, 'Dip ladyfingers into the cooled coffee and layer them in a serving dish.'),
 ('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 4, 'Spread half of the mascarpone mixture over the ladyfingers.'),
-('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 5, 'Repeat the layers, finishing with a dusting of cocoa powder.');
+('bbc0fe87-ed6d-4c4a-856b-bf32809d4d5d', 5, 'Repeat the layers finishing with a dusting of cocoa powder.');
 
 -- Belgian Fries recipe
 INSERT INTO steps (recipe_id, step_order, description) VALUES

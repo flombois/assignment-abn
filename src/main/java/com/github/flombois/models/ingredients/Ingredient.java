@@ -15,6 +15,8 @@ public class Ingredient extends BaseEntity {
     private String name;
 
 
+
+
     public String getName() {
         return name;
     }

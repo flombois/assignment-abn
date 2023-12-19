@@ -65,4 +65,7 @@ INSERT INTO ingredients (id, name) VALUES
 ('9ad27d3c-e223-4233-87fc-7091bc4ba4e9', 'Yogurt'),
 ('ecbc7761-6a78-4bb2-8b9b-ba615c2b9c8d', 'Garam Masala'),
 ('a5aa4532-c73a-423f-9ed8-149cdda969a7', 'Paprika'),
-('d7730df6-154f-4160-af09-3fa80bf1030b', 'Ground Cumin');
+('d7730df6-154f-4160-af09-3fa80bf1030b', 'Ground Cumin'),
+('ed551b2e-a130-4b15-a185-463d0737dc27', 'Cherry tomatoes'),
+('b8c30823-879c-4cb4-9c10-314d8fbcb531', 'Mozzarella'),
+('6e9d90b9-8e2a-49b0-bbe0-10bf80b17ea5', 'Fresh basil leaves');

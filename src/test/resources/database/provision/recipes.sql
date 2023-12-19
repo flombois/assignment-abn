@@ -12,7 +12,7 @@ VALUES ('c054e6c0-35d4-4de5-95d2-c3259fbb6683', 'Belgian Fries', 'Classic crispy
 
 -- Dutch Erwtensoep Recipe
 INSERT INTO recipes (id, name, description, servings)
-VALUES ('609a57c3-f720-4109-b68f-d55b186f6415', 'Dutch Erwtensoep', 'Hearty split pea soup, a traditional Dutch winter dish.', 6);
+VALUES ('609a57c3-f720-4109-b68f-d55b186f6415', 'Dutch Erwtensoep', 'Hearty split pea soup a traditional Dutch winter dish.', 6);
 
 -- Indian Chicken Tikka Masala Recipe
 INSERT INTO recipes (id, name, description, servings)

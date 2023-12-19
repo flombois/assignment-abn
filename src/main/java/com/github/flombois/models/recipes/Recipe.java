@@ -25,7 +25,6 @@ public class Recipe extends BaseEntity {
     @Column(nullable = false)
     private int servings;
 
-    @NotEmpty
     @Size(max = 1024)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "quantities",
@@ -33,7 +32,6 @@ public class Recipe extends BaseEntity {
             foreignKey = @ForeignKey(name = "FK_RECIPES_ON_INGREDIENT"))
     private List<@NotNull Quantity> quantities;
 
-    @NotEmpty
     @Size(max = 256)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "steps",

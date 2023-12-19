@@ -21,6 +21,10 @@ public class Step {
         return stepOrder;
     }
 
+    public void setStepOrder(int stepOrder) {
+        this.stepOrder = stepOrder;
+    }
+
     public String getDescription() {
         return description;
     }

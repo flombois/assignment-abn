@@ -61,6 +61,13 @@ public class RecipeResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    public Response post(@Valid Recipe recipe) {
+        getRecipeRepository().persist(recipe);
+        return Response.status(Response.Status.CREATED).entity(recipe).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/quantities")
     public Response addQuantity(@PathParam("id") UUID id, @Valid Quantity quantity) {
         Optional<Recipe> optionalRecipe = getRecipeRepository().findByIdOptional(id);

@@ -24,9 +24,7 @@ import java.util.UUID;
 @Transactional
 public class TagResource {
 
-
     private TagRepository tagRepository;
-
 
     @GET
     public Response list(@QueryParam("sort") List<String> sortQuery,

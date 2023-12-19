@@ -1,5 +1,6 @@
 package com.github.flombois.models.tags;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.flombois.models.BaseEntity;
 import com.github.flombois.models.recipes.Recipe;
 import jakarta.persistence.Column;
@@ -19,6 +20,8 @@ public class Tag extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @NotNull
+    @JsonIgnore
     @ManyToMany(mappedBy = "tags")
     private List<@NotNull Recipe> recipes;
 

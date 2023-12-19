@@ -375,5 +375,35 @@ class IngredientResourceTest implements ProvisionDatabase {
             }
 
         }
+
+        @Nested
+        @DisplayName("When resource deletion is requested")
+        class DeleteResource {
+
+            @Test
+            @DisplayName("Then return status code 204 NO CONTENT")
+            void delete() {
+                given()
+                        .log().all()
+                        .when()
+                        .delete("/ingredients/87a962f6-472b-4314-9dc4-79423619efee")
+                        .then()
+                        .log().all()
+                        .statusCode(HttpStatus.SC_NO_CONTENT);
+            }
+
+            @Test
+            @DisplayName("Then return error if the requested id does not match an existing resource")
+            void notFound() {
+                given()
+                        .log().all()
+                        .when()
+                        .delete("/ingredients/" + UUID.randomUUID())
+                        .then()
+                        .log().all()
+                        .statusCode(HttpStatus.SC_NOT_FOUND);
+            }
+
+        }
     }
 }

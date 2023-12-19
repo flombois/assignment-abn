@@ -1,4 +1,4 @@
-package com.github.flombois.resources;
+package com.github.flombois.resources.ingredients;
 
 import com.github.flombois.models.ingredients.Ingredient;
 import com.github.flombois.repositories.ingredients.IngredientRepository;
@@ -64,6 +64,18 @@ public class IngredientResource {
             ingredient.setName(update.getName());
             getIngredientRepository().persist(ingredient);
             return Response.ok(ingredient).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") UUID id) {
+        Optional<Ingredient> optionalIngredient = getIngredientRepository().findByIdOptional(id);
+        if(optionalIngredient.isPresent()) {
+            Ingredient ingredient = optionalIngredient.get();
+            getIngredientRepository().delete(ingredient);
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }

@@ -53,7 +53,7 @@ INSERT INTO ingredients (id, name) VALUES
 ('56b1a421-7e0e-412c-ab26-14e354239851', 'Butter'),
 ('3a1e3c8c-6271-467e-9a6f-2ab54278f49a', 'Chocolate Chips'),
 ('2ab8b9da-b019-4795-8e85-e036e2ae7ca7', 'Coffee'),
-('2ab8b9da-b019-4795-8e85-e036e2ae7ca7', 'Mascarpone'),
+('951cb351-0e4c-4764-aeaa-a9b6444edc76', 'Mascarpone'),
 ('e44cc84e-582c-42c7-ad9f-2584c8e14747', 'Cocoa powder'),
 ('03594121-d70d-49ed-9e25-bd02d5b238e4', 'Potatoes'),
 ('d1e1f62a-67ae-4c87-9b01-2589df312aba', 'Vegetable Oil'),
@@ -64,5 +64,5 @@ INSERT INTO ingredients (id, name) VALUES
 ('66dc6993-3c11-4ca7-ab94-8c26ceea806a', 'Chicken Thighs'),
 ('9ad27d3c-e223-4233-87fc-7091bc4ba4e9', 'Yogurt'),
 ('ecbc7761-6a78-4bb2-8b9b-ba615c2b9c8d', 'Garam Masala'),
-('66dc6993-3c11-4ca7-ab94-8c26ceea806a', 'Paprika'),
+('a5aa4532-c73a-423f-9ed8-149cdda969a7', 'Paprika'),
 ('d7730df6-154f-4160-af09-3fa80bf1030b', 'Ground Cumin');

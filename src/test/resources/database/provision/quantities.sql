@@ -37,6 +37,6 @@ INSERT INTO quantities (recipe_id, value, symbol, ingredient_id) VALUES
 ('180c1909-2f78-46f0-b3b1-b56e5b2fd267', 1, 'lb', '66dc6993-3c11-4ca7-ab94-8c26ceea806a'), -- Chicken Thighs
 ('180c1909-2f78-46f0-b3b1-b56e5b2fd267', 50, 'lb', '9ad27d3c-e223-4233-87fc-7091bc4ba4e9'), -- Yogurt
 ('180c1909-2f78-46f0-b3b1-b56e5b2fd267', 2, 'tbsp', 'ecbc7761-6a78-4bb2-8b9b-ba615c2b9c8d'), -- Garam Masala
-('180c1909-2f78-46f0-b3b1-b56e5b2fd267', 1, 'tbsp', '66dc6993-3c11-4ca7-ab94-8c26ceea806a'), -- Paprika
+('180c1909-2f78-46f0-b3b1-b56e5b2fd267', 1, 'tbsp', 'a5aa4532-c73a-423f-9ed8-149cdda969a7'), -- Paprika
 ('180c1909-2f78-46f0-b3b1-b56e5b2fd267', 1, 'tsp', '180c1909-2f78-46f0-b3b1-b56e5b2fd267'); -- Ground Cumin
 

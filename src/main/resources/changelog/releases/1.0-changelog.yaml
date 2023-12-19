@@ -35,9 +35,7 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_quantities
-                  name: id
+                  name: recipe_id
                   type: UUID
               - column:
                   constraints:
@@ -51,11 +49,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: ingredient_id
-                  type: UUID
-              - column:
-                  constraints:
-                    nullable: false
-                  name: recipe_id
                   type: UUID
             tableName: quantities
   - changeSet:
@@ -91,19 +84,6 @@ databaseChangeLog:
                     nullable: false
                   name: servings
                   type: INT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: value
-                  type: INT
-              - column:
-                  name: symbol
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: ingredient_id
-                  type: UUID
             tableName: recipes
   - changeSet:
       id: "1.0.3"
@@ -121,23 +101,16 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_steps
-                  name: id
-                  type: UUID
-              - column:
-                  constraints:
-                    nullable: false
-                  name: description
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
                   name: recipe_id
                   type: UUID
               - column:
                   name: step_order
                   type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: VARCHAR(255)
             tableName: steps
   - changeSet:
       id: "1.0.4"
@@ -241,11 +214,11 @@ databaseChangeLog:
             changeLogFile: changelog/releases/1.0-changelog.yaml
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: ingredient_id
-            baseTableName: recipes
-            constraintName: FK_RECIPES_ON_INGREDIENT
+            baseColumnNames: recipe_id
+            baseTableName: steps
+            constraintName: FK_STEPS_ON_RECIPE
             referencedColumnNames: id
-            referencedTableName: ingredients
+            referencedTableName: recipes
   - changeSet:
       id: "1.0.10"
       author: flombois
@@ -254,23 +227,6 @@ databaseChangeLog:
         - onFail: HALT
         - changeSetExecuted:
             id: 1.0.9
-            author: flombois
-            changeLogFile: changelog/releases/1.0-changelog.yaml
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: recipe_id
-            baseTableName: steps
-            constraintName: FK_STEPS_ON_RECIPE
-            referencedColumnNames: id
-            referencedTableName: recipes
-  - changeSet:
-      id: "1.0.11"
-      author: flombois
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      preConditions:
-        - onFail: HALT
-        - changeSetExecuted:
-            id: 1.0.10
             author: flombois
             changeLogFile: changelog/releases/1.0-changelog.yaml
       changes:
@@ -305,7 +261,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: tags
   - changeSet:
-      id: "1.0.12"
+      id: "1.0.11"
       author: flombois
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       preConditions:

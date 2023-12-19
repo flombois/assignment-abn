@@ -18,6 +18,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Resource class for managing ingredients.
+ *
+ * @see Ingredient
+ * @see IngredientRepository
+ *
+ */
 @Path("/ingredients")
 @Produces(MediaType.APPLICATION_JSON)
 @Transactional
@@ -25,6 +32,14 @@ public class IngredientResource {
 
     private IngredientRepository ingredientRepository;
 
+    /**
+     * Retrieves a paginated list of ingredients with optional sorting.
+     *
+     * @param sortQuery List of fields for sorting.
+     * @param pageIndex Page index for pagination.
+     * @param pageSize  Page size for pagination.
+     * @return Response with a paginated list of ingredients.
+     */
     @GET
     public Response list(@QueryParam("sort") List<String> sortQuery,
                          @QueryParam("page") @DefaultValue("0") @PositiveOrZero int pageIndex,
@@ -36,6 +51,12 @@ public class IngredientResource {
         return Response.ok(ingredients).build();
     }
 
+    /**
+     * Retrieves an ingredient by ID.
+     *
+     * @param id Ingredient ID.
+     * @return Response with the requested ingredient.
+     */
     @GET
     @Path("/{id}")
     public Response get(@PathParam("id") UUID id) {
@@ -45,6 +66,12 @@ public class IngredientResource {
          return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Creates a new ingredient.
+     *
+     * @param ingredient The ingredient to create.
+     * @return Response with the created ingredient.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(@Valid Ingredient ingredient) {
@@ -52,6 +79,14 @@ public class IngredientResource {
         return Response.status(Response.Status.CREATED).entity(ingredient).build();
     }
 
+
+    /**
+     * Updates an existing ingredient.
+     *
+     * @param id     Ingredient ID.
+     * @param update Updated ingredient data.
+     * @return Response with the updated ingredient.
+     */
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -66,6 +101,12 @@ public class IngredientResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Deletes an ingredient by ID.
+     *
+     * @param id Ingredient ID.
+     * @return Response indicating the success of the deletion.
+     */
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") UUID id) {
@@ -78,10 +119,20 @@ public class IngredientResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Retrieves the associated {@link IngredientRepository}.
+     *
+     * @return The ingredient repository.
+     */
     protected IngredientRepository getIngredientRepository() {
         return ingredientRepository;
     }
 
+    /**
+     * Injects the {@link IngredientRepository}.
+     *
+     * @param ingredientRepository The ingredient repository to inject.
+     */
     @Inject
     protected void setIngredientRepository(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;

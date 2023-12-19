@@ -26,6 +26,14 @@ public class TagResource {
 
     private TagRepository tagRepository;
 
+    /**
+     * Retrieves a list of tags with optional sorting and pagination.
+     *
+     * @param sortQuery  The list of sort options.
+     * @param pageIndex  The index of the page to retrieve.
+     * @param pageSize   The size of each page.
+     * @return A response containing the list of tags.
+     */
     @GET
     public Response list(@QueryParam("sort") List<String> sortQuery,
                          @QueryParam("page") @DefaultValue("0") @PositiveOrZero int pageIndex,
@@ -37,6 +45,12 @@ public class TagResource {
         return Response.ok(tags).build();
     }
 
+    /**
+     * Retrieves a tag by its ID.
+     *
+     * @param id The ID of the tag to retrieve.
+     * @return A response containing the retrieved tag.
+     */
     @GET
     @Path("/{id}")
     public Response get(@PathParam("id") UUID id) {
@@ -46,6 +60,12 @@ public class TagResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Retrieves recipes associated with a tag by its ID.
+     *
+     * @param id The ID of the tag to retrieve recipes for.
+     * @return A response containing the list of associated recipes.
+     */
     @GET
     @Path("/{id}/recipes")
     public Response getRecipesByTagId(@PathParam("id") UUID id) {
@@ -57,6 +77,12 @@ public class TagResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Creates a new tag.
+     *
+     * @param tag The tag to create.
+     * @return A response indicating the status of the operation.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(@Valid Tag tag) {
@@ -64,6 +90,13 @@ public class TagResource {
         return Response.status(Response.Status.CREATED).entity(tag).build();
     }
 
+    /**
+     * Updates an existing tag by its ID.
+     *
+     * @param id     The ID of the tag to update.
+     * @param update The updated tag information.
+     * @return A response containing the updated tag.
+     */
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -78,6 +111,12 @@ public class TagResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Deletes a tag by its ID.
+     *
+     * @param id The ID of the tag to delete.
+     * @return A response indicating the status of the operation.
+     */
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") UUID id) {
@@ -90,10 +129,20 @@ public class TagResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Retrieves the TagRepository instance.
+     *
+     * @return The TagRepository instance.
+     */
     protected TagRepository getTagRepository() {
         return tagRepository;
     }
 
+    /**
+     * Sets the TagRepository instance.
+     *
+     * @param tagRepository The TagRepository instance to set.
+     */
     @Inject
     protected void setTagRepository(TagRepository tagRepository) {
         this.tagRepository = tagRepository;

@@ -10,6 +10,9 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.validator.constraints.Length;
 
+/**
+ * Represents an ingredient entity in the Quarkus application.
+ */
 @Indexed
 @Entity(name = "ingredients")
 public class Ingredient extends BaseEntity {
@@ -21,10 +24,20 @@ public class Ingredient extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
+    /**
+     * Gets the name of the ingredient.
+     *
+     * @return The name of the ingredient.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the ingredient.
+     *
+     * @param name The name of the ingredient.
+     */
     public void setName(@NotBlank String name) {
         this.name = name;
     }

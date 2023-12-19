@@ -22,6 +22,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Resource class for managing recipes.
+ *
+ * @see Recipe
+ * @see RecipeRepository
+ */
 @Path("/recipes")
 @Produces(MediaType.APPLICATION_JSON)
 @Transactional
@@ -30,6 +36,14 @@ public class RecipeResource {
     private RecipeRepository recipeRepository;
     private TagRepository tagRepository;
 
+    /**
+     * Retrieves a paginated list of recipes with optional sorting.
+     *
+     * @param sortQuery List of fields for sorting.
+     * @param pageIndex Page index for pagination.
+     * @param pageSize  Page size for pagination.
+     * @return Response with a paginated list of recipes.
+     */
     @GET
     public Response list(@QueryParam("sort") List<String> sortQuery,
                          @QueryParam("page") @DefaultValue("0") @PositiveOrZero int pageIndex,
@@ -41,6 +55,12 @@ public class RecipeResource {
         return Response.ok(recipes).build();
     }
 
+    /**
+     * Retrieves a recipe by ID.
+     *
+     * @param id Recipe ID.
+     * @return Response with the requested recipe.
+     */
     @GET
     @Path("/{id}")
     public Response get(@PathParam("id") UUID id) {
@@ -50,6 +70,12 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Retrieves quantities of a recipe by ID.
+     *
+     * @param id Recipe ID.
+     * @return Response with the quantities of the requested recipe.
+     */
     @GET
     @Path("/{id}/quantities")
     public Response getQuantities(@PathParam("id") UUID id) {
@@ -59,6 +85,12 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Creates a new recipe.
+     *
+     * @param recipe The recipe to create.
+     * @return Response with the created recipe.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(@Valid Recipe recipe) {
@@ -66,6 +98,13 @@ public class RecipeResource {
         return Response.status(Response.Status.CREATED).entity(recipe).build();
     }
 
+    /**
+     * Adds a quantity to a recipe by ID.
+     *
+     * @param id       Recipe ID.
+     * @param quantity The quantity to add.
+     * @return Response with the added quantity.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/quantities")
@@ -80,6 +119,14 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Updates a quantity of a recipe by ID and index.
+     *
+     * @param id       Recipe ID.
+     * @param index    Index of the quantity to update.
+     * @param quantity The updated quantity.
+     * @return Response with the updated quantity.
+     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/quantities/{index}")
@@ -98,6 +145,13 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Deletes a quantity of a recipe by ID and index.
+     *
+     * @param id    Recipe ID.
+     * @param index Index of the quantity to delete.
+     * @return Response indicating the success of the deletion.
+     */
     @DELETE
     @Path("/{id}/quantities/{index}")
     public Response deleteQuantity(@PathParam("id") UUID id,
@@ -114,6 +168,12 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Retrieves steps of a recipe by ID.
+     *
+     * @param id Recipe ID.
+     * @return Response with the steps of the requested recipe.
+     */
     @GET
     @Path("/{id}/steps")
     public Response getSteps(@PathParam("id") UUID id) {
@@ -123,6 +183,13 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Adds a step to a recipe by ID.
+     *
+     * @param id   Recipe ID.
+     * @param step The step to add.
+     * @return Response with the added step.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/steps")
@@ -137,6 +204,14 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Updates a step of a recipe by ID and index.
+     *
+     * @param id    Recipe ID.
+     * @param index Index of the step to update.
+     * @param step  The updated step.
+     * @return Response with the updated step.
+     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/steps/{index}")
@@ -155,6 +230,13 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Deletes a step of a recipe by ID and index.
+     *
+     * @param id    Recipe ID.
+     * @param index Index of the step to delete.
+     * @return Response indicating the success of the deletion.
+     */
     @DELETE
     @Path("/{id}/steps/{index}")
     public Response deleteStep(@PathParam("id") UUID id,
@@ -171,6 +253,12 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Retrieves tags associated with a recipe by ID.
+     *
+     * @param id Recipe ID.
+     * @return Response with the tags associated with the requested recipe.
+     */
     @GET
     @Path("/{id}/tags")
     public Response getTags(@PathParam("id") UUID id) {
@@ -180,6 +268,13 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    /**
+     * Associates a tag with a recipe by ID and tag ID.
+     *
+     * @param id    Recipe ID.
+     * @param tagId Tag ID to associate.
+     * @return Response indicating the success of the association.
+     */
     @POST
     @Path("/{id}/tags/{tagId}")
     public Response associateTag(@PathParam("id") UUID id,
@@ -199,20 +294,39 @@ public class RecipeResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
-
-
+    /**
+     * Retrieves the RecipeRepository instance.
+     *
+     * @return The RecipeRepository instance.
+     */
     protected RecipeRepository getRecipeRepository() {
         return recipeRepository;
     }
+
+    /**
+     * Sets the RecipeRepository instance.
+     *
+     * @param recipeRepository The RecipeRepository instance to set.
+     */
     @Inject
     protected void setRecipeRepository(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 
+    /**
+     * Retrieves the TagRepository instance.
+     *
+     * @return The TagRepository instance.
+     */
     protected TagRepository getTagRepository() {
         return tagRepository;
     }
 
+    /**
+     * Sets the TagRepository instance.
+     *
+     * @param tagRepository The TagRepository instance to set.
+     */
     @Inject
     protected void setTagRepository(TagRepository tagRepository) {
         this.tagRepository = tagRepository;

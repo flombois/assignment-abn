@@ -9,7 +9,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
-import org.jose4j.json.internal.json_simple.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -149,13 +148,11 @@ public class TagResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return the newly created resource")
             void post() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Spicy"));
-
                 Tag tag = given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Spicy"))
                         .post("/tags")
                         .then()
                         .log().all()
@@ -176,12 +173,11 @@ public class TagResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return status code 200 OK")
             void put() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Fall"));
                 Tag tag = given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Fall"))
                         .put("/tags/8da77c5c-21b4-4d58-9069-926d3ed6ea54")
                         .then()
                         .log().all()
@@ -197,12 +193,11 @@ public class TagResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return error if the requested id does not match an existing resource")
             void notFound() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Fall"));
                 given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Fall"))
                         .put("/tags/" + UUID.randomUUID())
                         .then()
                         .log().all()

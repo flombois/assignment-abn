@@ -6,3 +6,5 @@ quarkus:
   hibernate-search-orm:
     elasticsearch:
       version: 8
+  test:
+    continuous-testing: DISABLED

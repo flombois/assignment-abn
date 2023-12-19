@@ -9,7 +9,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
-import org.jose4j.json.internal.json_simple.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -284,12 +283,11 @@ class IngredientResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return the newly created resource")
             void post() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Dark chocolate"));
                 Ingredient ingredient = given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Dark chocolate"))
                         .post("/ingredients")
                         .then()
                         .log().all()
@@ -304,12 +302,11 @@ class IngredientResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return an error if an ingredient with the same name already exists")
             void alreadyExisting() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Maple syrup"));
                 given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Maple syrup"))
                         .post("/ingredients")
                         .then()
                         .log().all()
@@ -326,12 +323,11 @@ class IngredientResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return status code 200 OK")
             void put() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Chili sauce"));
                 Ingredient ingredient = given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Chili sauce"))
                         .put("/ingredients/8009bc67-1b04-41cd-9d9e-a566b3a6b48e")
                         .then()
                         .log().all()
@@ -347,12 +343,11 @@ class IngredientResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return an error if an ingredient with the same name already exists")
             void alreadyExisting() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Maple syrup"));
                 given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Maple syrup"))
                         .put("/ingredients/da6ca80f-a11b-4ada-8c42-47a06d406234")
                         .then()
                         .log().all()
@@ -362,12 +357,11 @@ class IngredientResourceTest implements ProvisionDatabase {
             @Test
             @DisplayName("Then return error if the requested id does not match an existing resource")
             void notFound() {
-                JSONObject requestBody = new JSONObject(Map.of("name", "Beer"));
                 given()
                         .log().all()
                         .when()
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                        .body(requestBody)
+                        .body(Map.of("name", "Beer"))
                         .put("/ingredients/" + UUID.randomUUID())
                         .then()
                         .log().all()

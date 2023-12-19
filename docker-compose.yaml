@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgresql:
+    container_name: recipes-postgres
+    restart: unless-stopped
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    volumes:
+      - recipes-postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  elasticsearch:
+    container_name: recipes-elasticsearch
+    restart: unless-stopped
+    image: elastic/elasticsearch:8.9.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+
+  quarkus:
+    container_name: recipes-quarkus
+    restart: unless-stopped
+    image: local/default/recipes-quarkus:demo
+    depends_on:
+     - postgresql
+     - elasticsearch
+    ports:
+      - "9000:9000"
+    environment:
+      - QUARKUS_DATASOURCE_USERNAME=${POSTGRES_USERNAME}
+      - QUARKUS_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+
+volumes:
+  recipes-postgres-data:
+    external: true

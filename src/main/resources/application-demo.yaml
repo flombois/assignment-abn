@@ -1,5 +1,10 @@
 quarkus:
+  http:
+    port: 9000
   hibernate-orm:
-    sql-load-script: demo.sql
     database:
       generation: none
+  datasource:
+    db-kind: postgresql
+    jdbc:
+      url: jdbc:postgresql://postgresql:5432/recipesdb

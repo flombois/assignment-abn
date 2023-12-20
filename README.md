@@ -1,54 +1,85 @@
 # assignment-abn
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This Java application, built with Java 17 and Quarkus, provides a RESTful API for managing favorite recipes.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Requirements
 
-## Running the application in dev mode
+### 1. Java Version
 
-You can run your application in dev mode that enables live coding using:
+- The application is developed using Java 17.
 
-```shell script
-mvn compile quarkus:dev
+### 2. Quarkus Framework
+
+- Quarkus is used as the underlying framework for building the application.
+
+### 3. Functionality
+
+- The application allows users to add, update, remove, and fetch recipes.
+- Users can filter recipes based on the following criteria:
+    1. Whether the dish is vegetarian.
+    2. The number of servings.
+    3. Specific ingredients (include or exclude).
+    4. Text search within the instructions.
+
+## Project Structure
+
+The project follows a standard Maven project structure. Key files and directories include:
+
+- `src/main`: Contains the main application code.
+- `src/test`: Contains unit and integration tests.
+- `pom.xml`: Maven Project Object Model file with project configuration.
+
+## Dependencies
+
+The project includes the following dependencies managed by Quarkus:
+
+- Quarkus Container Image Docker
+- Quarkus RestEasy Reactive Jackson
+- Quarkus Arc
+- Quarkus Hibernate ORM Panache
+- Quarkus Hibernate Validator
+- Quarkus Liquibase
+- Quarkus JDBC PostgreSQL
+- Quarkus Config YAML
+- Quarkus HAL
+- Quarkus Hibernate Search ORM Elasticsearch
+- Quarkus JUnit 5
+
+Additionally, the following test dependencies are included:
+
+- Testcontainers
+- PostgreSQL (Testcontainers)
+- Rest Assured
+
+## Build and Run
+
+You can build the project and run the application using Docker:
+
+```bash
+sh ./build-demo.sh // Or chmod +x ./build-demo.sh && ./build-demo.sh
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-mvn package
+Use the provided docker-compose file to quickly deploy the application
+```bash
+docker compose up -d 
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+Make sure to provide Postgresql and elasticsearch passwords in a .env file 
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-mvn package -Dquarkus.package.type=uber-jar
+```.env
+POSTGRES_USER=recipesdb
+POSTGRES_PASSWORD=<postgres_password>
+ELASTIC_PASSWORD=<elastic_password>
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Design choices
 
-## Creating a native executable
+The application includes three independent endpoints:
 
-You can create a native executable using:
+1. The main 'Recipe' endpoint (/recipes) that manage recipes properties and dependencies
+2. A secondary 'Ingredient' endpoint (/ingredients) that manage ingredients so that they can be shared among different recipes
+3. A third 'Tag' endpoint (/tags) that allow the creation of recipes' tags making the retrieval of vegetarian recipes easy and allows to extend to any possible tag (for instance 'Asian cuisine', 'Gluten-free' ...)
 
-```shell script
-mvn package -Dnative
-```
+In addition, comes a search endpoint (/search) to perform full text search based on the recipe and ingredients properties, it uses an Elasticsearch reverse index
+to index Recipes and ingredient properties.
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-mvn package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/assignment-abn-1.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
